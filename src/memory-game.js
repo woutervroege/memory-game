@@ -30,20 +30,18 @@ export class MemoryGame extends LitElement {
                 max-width: 100%;
                 max-height: 100%;
                 aspect-ratio: 3/2;
-                // border: 1px solid red;
-                // overflow: hidden;
-                // container-type: inline-size;
-                // container-name: game;
+                container-type: inline-size;
+                container-name: game;
             }
 
             div {
                 display: grid;
                 grid-template-columns: repeat(var(--cols), 1fr);
-                gap: 12px;
+                gap: 3cqw;
             }
 
             memory-tile {
-                // hei: calc(100 / var(--rows) * 1cqmax);
+                --font-size: 10cqw;
             }
 
             [hidden] {
@@ -98,7 +96,24 @@ export class MemoryGame extends LitElement {
 
     reset() {
         this.#shuffle();
-        this.#tiles.forEach(item => {item.inert = false;item.unselect()});
+        this.inert = true;
+
+        this.#tiles.forEach(item => {
+            const timeout = Math.floor(Math.random() * (1000 - 1 + 1) + 1);
+            window.setTimeout(() => item.select(), timeout);
+        });
+
+        window.setTimeout(() => {
+            this.#tiles.forEach(item => {
+                const timeout = Math.floor(Math.random() * (1000 - 1 + 1) + 1);
+                window.setTimeout(() => item.unselect(), timeout);
+            });
+        }, 3000);
+
+        window.setTimeout(() => {
+            this.inert = false;
+        }, 4000);
+
     }
 
     #shuffle() {

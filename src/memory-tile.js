@@ -46,9 +46,10 @@ export class MemoryTile extends LitElement {
                 text-align: center;
                 transition: transform 500ms;
                 transform-style: preserve-3d;
-                border: 12px solid white;
                 box-shadow: 0 0 5px #ccc;
                 border-radius: 12px;
+                background:white;
+                padding: 1cqw;
               }
               
               /* Do an horizontal flip when you move the mouse over the flip box container */
@@ -64,11 +65,12 @@ export class MemoryTile extends LitElement {
               /* Position the front and back side */
               .front, .back {
                 position: absolute;
-                width: 100%;
-                height: 100%;
+                width: calc(100% - 2cqw);
+                height: calc(100% - 2cqw);
                 -webkit-backface-visibility: hidden; /* Safari */
                 backface-visibility: hidden;
-                border-radius: 8px;
+                border-radius: 10px;
+                box-sizing: border-box; 
               }
               
               /* Style the front side (fallback if image is missing) */
@@ -83,7 +85,7 @@ export class MemoryTile extends LitElement {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 8vmax;
+                font-size: var(--font-size, 8vmax);
               }
         `;
     }
@@ -106,6 +108,10 @@ export class MemoryTile extends LitElement {
 
     get selected() {
         return this.#internals.states.has('selected');
+    }
+
+    select() {
+        this.#internals.states.add('selected');
     }
 
     unselect() {
