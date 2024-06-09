@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "deploy": "firebase deploy"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "firebase-tools": "^13.11.2",
-    "vite": "^5.2.11"
+    "vite": "^5.2.11",
+    "vite-plugin-mkcert": "^1.17.5"
   }
 }
